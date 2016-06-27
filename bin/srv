@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import args from 'args'
+import chalk from 'chalk';
 import srv from './lib/core.js'
 import { resolve } from 'path'
 
@@ -8,10 +9,12 @@ import { resolve } from 'path'
 import preset2015 from 'babel-preset-es2015'
 import transformRuntime from 'babel-plugin-transform-runtime'
 import alias from 'babel-plugin-module-alias'
+import apidoc from 'apidoc';
 
 args
   .option(['p', 'port'], 'Port to listen on', 3000, parseInt)
   .option(['H', 'host'], 'Host to listen on', '0.0.0.0')
+  .option(['D', 'docs'], 'Generate Docs', true)
   .option(['n', 'no-babel'], 'Skip Babel transformation')
 
 const flags = args.parse(process.argv)
@@ -49,27 +52,41 @@ if (!flags.noBabel) {
   })
 }
 
+const opt = {
+    dest: 'doc/',
+    src: ['test'],
+    includeFilters: [ ".*\\.js$" ]
+};
+
+try {
+  var created = apidoc.createDoc(opt);
+  console.log(chalk.blue('> Docs generated.'));
+} catch (e) {
+  console.error(chalk.red(`> Error! ${opt.src}" does not exist.`));
+  process.exit(1)
+}
+
 let mod
 
 try {
   mod = require(file).default
 } catch (e) {
-  console.error(`> \u001b[31mError!\u001b[39m "${file}" does not exist.`)
-  process.exit(1)
+  console.error(chalk.red(`> Error! ${file}" does not exist.`));
+  process.exit(1);
 }
 
 if ('function' !== typeof mod) {
-  console.error(`> \u001b[31mError!\u001b[39m "${file}" does not export a function.`)
-  process.exit(1)
+  console.error(chalk.red(`> Error! ${file} does not export a function.`));
+  process.exit(1);
 }
 
-const port = flags.port || 3000
-const host = flags.host || '0.0.0.0'
+const port = flags.port || 3000;
+const host = flags.host || '0.0.0.0';
 
 srv(mod).listen(port, host, (err) => {
     if (err) {
         console.error(err.stack);
         process.exit(1);
     }
-    console.log(`> \u001b[96mReady!\u001b[39m Listening on ${host}:${port}.`)
+    console.log(chalk.green(`> Ready! Listening on ${host}:${port}.`));
 });

@@ -3,6 +3,7 @@
 import args from 'args'
 import chalk from 'chalk';
 import srv from './lib/core.js'
+import pkg from '../package.json';
 import { resolve } from 'path'
 
 // babel
@@ -14,11 +15,21 @@ import apidoc from 'apidoc';
 args
   .option(['p', 'port'], 'Port to listen on', 3000, parseInt)
   .option(['H', 'host'], 'Host to listen on', '0.0.0.0')
-  .option(['D', 'docs'], 'Generate Docs', true)
+  .option(['D', 'docs'], 'Generate Docs')
   .option(['n', 'no-babel'], 'Skip Babel transformation')
 
 const flags = args.parse(process.argv)
+const port = flags.port || 3000;
+const host = flags.host || '0.0.0.0';
+
 let file = args.sub.pop()
+
+const banner = `
+△ srv - v${pkg.version}
+github.com/alfg/srv
+`;
+
+console.log(chalk.cyan(banner));
 
 if (!file) {
   try {
@@ -37,6 +48,7 @@ if ('/' !== file[0]) {
   file = resolve(process.cwd(), file)
 }
 
+// Skip babel transpilation if flag set.
 if (!flags.noBabel) {
   const path = require.resolve('babel-runtime/package')
   .replace(/[\\\/]package.json$/, '')
@@ -50,22 +62,28 @@ if (!flags.noBabel) {
       ]]
     ]
   })
+  console.log(chalk.blue('△ Babel transpiled.'));
 }
 
-const opt = {
-    dest: 'doc/',
-    src: ['test'],
-    includeFilters: [ ".*\\.js$" ]
-};
+// Generate docs flag.
+if (flags.docs) {
+    const opt = {
+        dest: 'docs/',
+        src: flags.docs || 'lib/',
+        includeFilters: [ ".*\\.js$" ],
+        silent: true
+    };
 
-try {
-  var created = apidoc.createDoc(opt);
-  console.log(chalk.blue('> Docs generated.'));
-} catch (e) {
-  console.error(chalk.red(`> Error! ${opt.src}" does not exist.`));
-  process.exit(1)
+    try {
+      var created = apidoc.createDoc(opt);
+      console.log(chalk.blue('△ Docs generated.'), chalk.white(`http://${host}:${port}/docs`));
+    } catch (e) {
+      console.error(chalk.red(`> Error! ${opt.src}" does not exist.`));
+      process.exit(1)
+    }
 }
 
+// Load mod instance.
 let mod
 
 try {
@@ -80,13 +98,10 @@ if ('function' !== typeof mod) {
   process.exit(1);
 }
 
-const port = flags.port || 3000;
-const host = flags.host || '0.0.0.0';
-
 srv(mod).listen(port, host, (err) => {
     if (err) {
         console.error(err.stack);
         process.exit(1);
     }
-    console.log(chalk.green(`> Ready! Listening on ${host}:${port}.`));
+    console.log(chalk.green('△ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

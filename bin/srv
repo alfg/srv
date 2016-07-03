@@ -15,18 +15,20 @@ import apidoc from 'apidoc';
 args
   .option(['p', 'port'], 'Port to listen on', 3000, parseInt)
   .option(['H', 'host'], 'Host to listen on', '0.0.0.0')
-  .option(['D', 'docs'], 'Generate Docs')
+  .option(['D', 'docs'], 'Generate Docs from folder', 'lib')
   .option(['n', 'no-babel'], 'Skip Babel transformation')
 
-const flags = args.parse(process.argv)
+const flags = args.parse(process.argv, {
+    value: "entrypoint.js"
+});
 const port = flags.port || 3000;
 const host = flags.host || '0.0.0.0';
 
 let file = args.sub.pop()
 
 const banner = `
-△ srv - v${pkg.version}
-github.com/alfg/srv
+▼ ${pkg.name} - v${pkg.version}
+${pkg.homepage}
 `;
 
 console.log(chalk.cyan(banner));
@@ -62,7 +64,7 @@ if (!flags.noBabel) {
       ]]
     ]
   })
-  console.log(chalk.blue('△ Babel transpiled.'));
+  console.log(chalk.blue('▼ Babel transpiled.'));
 }
 
 // Generate docs flag.
@@ -76,7 +78,7 @@ if (flags.docs) {
 
     try {
       var created = apidoc.createDoc(opt);
-      console.log(chalk.blue('△ Docs generated.'), chalk.white(`http://${host}:${port}/docs`));
+      console.log(chalk.blue('▼ Docs generated.'), chalk.white(`http://${host}:${port}/docs`));
     } catch (e) {
       console.error(chalk.red(`> Error! ${opt.src}" does not exist.`));
       process.exit(1)
@@ -103,5 +105,5 @@ srv(mod).listen(port, host, (err) => {
         console.error(err.stack);
         process.exit(1);
     }
-    console.log(chalk.green('△ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
+    console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

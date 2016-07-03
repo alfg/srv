@@ -1,10 +1,12 @@
 # `▼srv`
-WIP
-
 ▼ A modern, opinionated and simple microservices stack built on Express.
 
+**Currently a work-in-progress project!**
+
+![npm-version](https://img.shields.io/npm/v/srv-cli.svg)
+
 ## Why?
-Creating services using the [microservices architecture](http://martinfowler.com/articles/microservices.html) pattern can involve a lot of repeated boilerplate, including server, logging, documentation, transpilation and other middleware.
+Creating services using the [microservices architecture](http://martinfowler.com/articles/microservices.html) pattern can involve a lot of repeated boilerplate code including server, logging, documentation, transpilation and other middleware.
 
 `srv` helps combine the common boilerplate code, while allowing you to extend as needed.
 
@@ -23,7 +25,8 @@ Creating services using the [microservices architecture](http://martinfowler.com
 
 ## Install
 ```
-$ npm install -g srv
+$ npm install -g srv-cli
+$ srv --help
 ```
 
 ## Example
@@ -50,7 +53,7 @@ Any ES2015 code will automatically be transpiled (via babel), then served at the
 ## CLI Reference
 ```
 $ srv --help
-Usage: srv [options] [command]
+Usage: srv [options] [command] entrypoint.js
 
 Commands:
 
@@ -58,7 +61,7 @@ Commands:
 
 Options:
 
-  -D, --docs          Generate Docs
+  -D, --docs [value]  Generate Docs from folder
   -h, --help          Output usage information
   -H, --host [value]  Host to listen on
   -n, --no-babel      Skip Babel transformation

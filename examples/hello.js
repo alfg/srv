@@ -1,4 +1,10 @@
 /**
+ * Sample apidoc hello.js application.
+ * Run using: srv hello.js
+ */
+
+
+/**
  * @api {get} /hello/:name Say "Hello" to user.
  * @apiName GetHello
  * @apiGroup Hello
@@ -13,9 +19,9 @@
  *     }
  */
 export default function hello(app) {
-    app.get('/hello/:user', (req, res) => {
-        const user = req.params.user;
-        app.logger.info(`Hello ${user}!`);
-        res.json({'hello': user});
-    })
+  app.get('/hello/:user', (req, res) => {
+    const user = req.params.user;
+    app.logger.info(`Hello ${user}!`);
+    res.json({ hello: user });
+  });
 }

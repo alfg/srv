@@ -52,9 +52,13 @@
   },
   "devDependencies": {
     "del": "^2.2.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.10.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.0.1"
   }

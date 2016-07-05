@@ -28,7 +28,7 @@ gulp.task('transpile-lib', () => (
 ));
 
 gulp.task('watch', () => {
-  gulp.watch('lib/**/*', ['transpile']);
+  gulp.watch('lib/**/*', ['build']);
 });
 
 gulp.task('lint', () => (
@@ -38,5 +38,5 @@ gulp.task('lint', () => (
   .pipe(eslint.failAfterError())
 ));
 
-gulp.task('default', ['watch', 'transpile-bin', 'transpile-lib']);
+gulp.task('default', ['build', 'watch']);
 gulp.task('build', ['transpile-bin', 'transpile-lib']);

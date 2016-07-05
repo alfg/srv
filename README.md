@@ -70,28 +70,44 @@ Options:
 ```
 
 ### Generating Documentation
-TODO
+RESTful documentation generation is based on [apiDoc](http://apidocjs.com/) params. See [example/hello.js](examples/hello.js) for an example.
 
-### Babel
-TODO
+Run the following command to generate documentation:
+```
+$ srv entrypoint.js --docs examples
+```
+
+`examples` - Generate Docs from folder.
+
+View docs at: http://0.0.0.0:3000/docs
+
+Refer to http://apidocjs.com/#params for supported apiDoc params.
+
+
+### Babel/ES6
+By default, `srv` will transpile the entrypoint file (via babel) its dependencies with the es2015 preset. No need to setup babel yourself, it works out of the box!
+
+See https://babeljs.io/docs/plugins/preset-es2015/ for supported plugins loaded by preset-es2015.
+
 
 ## Logging
-TODO
+[Winston](https://github.com/winstonjs/winston) logging transport is enabled by default and will log all http `info` logs to `logs/` and all console `debug` logs to stdout.
+
+You can also call the logging instance directly via the `express.logger` context.
+
+See [examples/hello.js](examples/hello.js) for an example.
+
 
 ## CORS
-TODO
+[CORS](http://enable-cors.org/) middleware is enabled for all requests by default (via [express-cors](https://github.com/expressjs/cors))
+
+You can configure whitelisted domains in the default configuration.
 
 ## Adding Middleware
 TODO
 
 ## Development
-TODO
-
-## TODO
-* Caching
-* Default Configuration
-* Environment Variables
-
+See: [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ## License
 MIT

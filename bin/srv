@@ -1,38 +1,35 @@
 #!/usr/bin/env node
 
-import args from 'args'
+import program from 'commander';
 import chalk from 'chalk';
-import srv from './lib/core.js'
 import pkg from '../package.json';
 import { resolve } from 'path'
 
-// babel
-import preset2015 from 'babel-preset-es2015'
-import transformRuntime from 'babel-plugin-transform-runtime'
-import alias from 'babel-plugin-module-alias'
-import apidoc from 'apidoc';
+import * as cmd from './cmd/index';
 
-args
-  .option(['p', 'port'], 'Port to listen on', 3000, parseInt)
-  .option(['H', 'host'], 'Host to listen on', '0.0.0.0')
-  .option(['D', 'docs'], 'Generate Docs from folder', 'lib')
-  .option(['n', 'no-babel'], 'Skip Babel transformation')
-
-const flags = args.parse(process.argv, {
-    value: "entrypoint.js"
-});
-const port = flags.port || 3000;
-const host = flags.host || '0.0.0.0';
-
-let file = args.sub.pop()
-
+// Banner.
 const banner = `
 ▼ ${pkg.name} - v${pkg.version}
 ${pkg.homepage}
 `;
-
 console.log(chalk.cyan(banner));
 
+// Parse CLI args.
+program
+  .version(pkg.version)
+  .usage('entrypoint.js [options]')
+  .option('-p, --port [n]', 'Port to listen on', 3000)
+  .option('-H, --host [value]', 'Host to listen on', '0.0.0.0')
+  .option('-D, --docs [value]', 'Generate Docs from folder', 'lib')
+  .option('-n, --no-babel', 'Skip Babel transformation')
+  .parse(process.argv);
+
+const port = program.port || 3000;
+const host = program.host || '0.0.0.0';
+
+
+// Parse entrypoint file.
+let file = program.args.pop();
 if (!file) {
   try {
     let packageJson = require(resolve(process.cwd(), 'package.json'))
@@ -41,9 +38,9 @@ if (!file) {
 }
 
 if (!file) {
-  console.error(`\n> \u001b[31mError!\u001b[39m Please supply a file.`)
-  args.showHelp()
-  process.exit(1)
+  console.error(chalk.red('Error! Please supply a file.'));
+  args.showHelp();
+  process.exit(1);
 }
 
 if ('/' !== file[0]) {
@@ -51,59 +48,31 @@ if ('/' !== file[0]) {
 }
 
 // Skip babel transpilation if flag set.
-if (!flags.noBabel) {
-  const path = require.resolve('babel-runtime/package')
-  .replace(/[\\\/]package.json$/, '')
-
-  require('babel-register')({
-    presets: [preset2015],
-    plugins: [
-      transformRuntime,
-      [alias, [
-        { src: path, expose: 'babel-runtime' }
-      ]]
-    ]
-  })
-  console.log(chalk.blue('▼ Babel transpiled.'));
+if (!program.noBabel) {
+  try {
+    cmd.transpile();
+    console.log(chalk.blue('▼ Babel transpiled. Preset: ES2015'));
+  } catch (err) {
+    console.error(chalk.red(err));
+    process.exit(1);
+  }
 }
 
 // Generate docs flag.
-if (flags.docs) {
-    const opt = {
-        dest: 'docs/',
-        src: flags.docs || 'lib/',
-        includeFilters: [ ".*\\.js$" ],
-        silent: true
-    };
-
-    try {
-      var created = apidoc.createDoc(opt);
-      console.log(chalk.blue('▼ Docs generated.'), chalk.white(`http://${host}:${port}/docs`));
-    } catch (e) {
-      console.error(chalk.red(`> Error! ${opt.src}" does not exist.`));
-      process.exit(1)
-    }
+if (program.docs) {
+  try {
+    cmd.docs(program.docs);
+    console.log(chalk.blue('▼ Docs generated.'), chalk.white(`http://${host}:${port}/docs`));
+  } catch (err) {
+    console.error(chalk.red(err));
+    process.exit(1);
+  }
 }
 
-// Load mod instance.
-let mod
-
-try {
-  mod = require(file).default
-} catch (e) {
-  console.error(chalk.red(`> Error! ${file}" does not exist.`));
-  process.exit(1);
-}
-
-if ('function' !== typeof mod) {
-  console.error(chalk.red(`> Error! ${file} does not export a function.`));
-  process.exit(1);
-}
-
-srv(mod).listen(port, host, (err) => {
-    if (err) {
-        console.error(err.stack);
-        process.exit(1);
-    }
-    console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
+// Start server.
+cmd.server(file, port, host, (err) => {
+  if (err) {
+      console.error(chalk.red(err));
+  }
+  console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

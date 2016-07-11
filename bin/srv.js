@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+/* eslint no-console:0 */
+
 import program from 'commander';
 import chalk from 'chalk';
 import pkg from '../package.json';
-import { resolve } from 'path'
+import { resolve } from 'path';
 
 import * as cmd from './cmd/index';
 
@@ -32,19 +34,22 @@ const host = program.host || '0.0.0.0';
 let file = program.args.pop();
 if (!file) {
   try {
-    let packageJson = require(resolve(process.cwd(), 'package.json'))
-    file = packageJson.main
-  } catch (e) {}
+    const packageJson = require(resolve(  // eslint-disable-line global-require
+      process.cwd(), 'package.json'));
+    file = packageJson.main;
+  } catch (e) {
+    console.error(chalk.red(e));
+    process.exit(1);
+  }
 }
 
 if (!file) {
   console.error(chalk.red('Error! Please supply a file.'));
-  args.showHelp();
   process.exit(1);
 }
 
-if ('/' !== file[0]) {
-  file = resolve(process.cwd(), file)
+if (file[0] !== '/') {
+  file = resolve(process.cwd(), file);
 }
 
 // Skip babel transpilation if flag set.
@@ -72,7 +77,7 @@ if (program.docs) {
 // Start server.
 cmd.server(file, port, host, (err) => {
   if (err) {
-      console.error(chalk.red(err));
+    console.error(chalk.red(err));
   }
   console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

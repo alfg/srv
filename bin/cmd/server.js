@@ -1,27 +1,23 @@
-import srv from '../lib/core.js'
+import srv from '../lib/core.js';  // eslint-disable-line import/no-unresolved
 
 export default function server(file, port, host, cb) {
   // Load mod instance.
-  let mod
+  let mod;
 
   try {
-    mod = require(file).default
+    mod = require(file).default;  // eslint-disable-line global-require
   } catch (e) {
-    //throw new Error(`${file}" does not exist.`);
     cb(new Error(`${file} does not exist.`));
   }
 
-  if ('function' !== typeof mod) {
+  if (typeof mod !== 'function') {
     cb(new Error(`${file} does not export a function.`));
-    //throw new Error(`${file} does not export a function.`);
   }
 
   srv(mod).listen(port, host, (err) => {
-      if (err) {
-          return cb(err.stack);
-          //throw new Error(err.stack);
-      }
-      cb(null);
-      //console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
+    if (err) {
+      return cb(err.stack);
+    }
+    return cb(null);
   });
 }

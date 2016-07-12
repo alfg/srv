@@ -20,7 +20,7 @@
   "scripts": {
     "gulp": "gulp",
     "prepublish": "npm run gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
+    "ava": "^0.15.2",
     "del": "^2.2.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-config-airbnb-base": "^3.0.1",
@@ -60,6 +61,7 @@
     "gulp-cached": "^1.1.0",
     "gulp-eslint": "^3.0.1",
     "gulp-ext": "^1.0.0",
-    "gulp-task-listing": "^1.0.1"
+    "gulp-task-listing": "^1.0.1",
+    "request-promise": "^3.0.0"
   }
 }

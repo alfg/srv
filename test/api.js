@@ -33,13 +33,13 @@ test('res.send(200 <String>)', async t => {
 
 test('res.json(200 <Object>)', async t => {
   const fn = async (app) => {
-    app.get('/hello', (req, res) => {
+    app.get('/', (req, res) => {
       res.json({ hello: 'world' });
     });
   }
 
   const url = await listen(fn);
-  const res = await request(url + '/hello', { json: true});
+  const res = await request(url, { json: true});
 
   t.deepEqual(res, { hello: 'world' });
 });

@@ -8,35 +8,35 @@ const eslint = require('gulp-eslint');
 
 gulp.task('help', help);
 
-gulp.task('clean', function () {
+gulp.task('clean', () => {
   del(['build']);
 });
 
-gulp.task('transpile-bin', function () {
-  return gulp.src('bin/**/*')
+gulp.task('transpile-bin', () => (
+  gulp.src('bin/**/*')
   .pipe(cache('bin'))
   .pipe(babel())
   .pipe(ext.crop())
   .pipe(gulp.dest('build'))
-});
+));
 
-gulp.task('transpile-lib', function () {
-  return gulp.src('lib/**/*')
+gulp.task('transpile-lib', () => (
+  gulp.src('lib/**/*')
   .pipe(cache('lib'))
   .pipe(babel())
   .pipe(gulp.dest('build/lib'))
-});
+));
 
-gulp.task('watch', function () {
+gulp.task('watch', () => {
   gulp.watch('lib/**/*', ['build']);
 });
 
-gulp.task('lint', function () {
-  return gulp.src(['**/*.js', '!node_modules/**', '!build/**', '!docs/**'])
+gulp.task('lint', () => (
+  gulp.src(['**/*.js', '!node_modules/**', '!build/**', '!docs/**'])
   .pipe(eslint())
   .pipe(eslint.format())
   .pipe(eslint.failAfterError())
-});
+));
 
 gulp.task('default', ['build', 'watch']);
 gulp.task('build', ['transpile-bin', 'transpile-lib']);

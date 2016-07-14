@@ -5,17 +5,16 @@ import request from 'request-promise';
 
 const listen = (fn) => {
   const server = srv(fn);
-  const port = 0;
   const host = '127.0.0.1';
 
   return new Promise((resolve, reject) => {
-    const listener = server.listen(port, host, err => {
+    const listener = server.listen(err => {
       if (err) return reject(err);
       const port = listener.address().port;
-      resolve(`http://${host}:${port}`);
+      return resolve(`http://${host}:${port}`);
     });
   });
-}
+};
 
 
 test('res.send(200 <String>)', async t => {
@@ -23,7 +22,7 @@ test('res.send(200 <String>)', async t => {
     app.get('/', (req, res) => {
       res.send('hello');
     });
-  }
+  };
 
   const url = await listen(fn);
   const res = await request(url);
@@ -36,10 +35,10 @@ test('res.json(200 <Object>)', async t => {
     app.get('/', (req, res) => {
       res.json({ hello: 'world' });
     });
-  }
+  };
 
   const url = await listen(fn);
-  const res = await request(url, { json: true});
+  const res = await request(url, { json: true });
 
   t.deepEqual(res, { hello: 'world' });
 });

@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "ava": "^0.15.2",
+    "babel-eslint": "^6.1.2",
     "del": "^2.2.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-config-airbnb-base": "^3.0.1",

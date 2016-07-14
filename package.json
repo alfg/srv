@@ -20,7 +20,7 @@
   "scripts": {
     "gulp": "gulp",
     "prepublish": "npm run gulp build",
-    "test": "ava"
+    "test": "gulp build && ava"
   },
   "repository": {
     "type": "git",

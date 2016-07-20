@@ -49,7 +49,7 @@ test('health-check OK', async t => {
   const fn = () => {};  // noop.
 
   const url = await listen(fn);
-  const res = await request(url + '/health-check');
+  const res = await request(`${url}/health-check`);
 
   t.deepEqual(res, 'HTTP OK');
 });
@@ -59,8 +59,10 @@ test('test CORS', async t => {
 
   const url = await listen(fn);
 
-  const headers = { 'origin': 'testing.com' };
-  const res = await request(url + '/health-check', { resolveWithFullResponse: true, headers: headers });
+  const headers = { origin: 'testing.com' };
+  const res = await request(`${url}/health-check`, {
+    resolveWithFullResponse: true, headers,
+  });
 
   t.deepEqual(res.headers['access-control-allow-origin'], 'testing.com');
 });
@@ -69,7 +71,7 @@ test('null function', async t => {
   const fn = null;  // noop.
 
   const url = await listen(fn);
-  const res = await request(url + '/health-check', { resolveWithFullResponse: true });
+  const res = await request(`${url}/health-check`, { resolveWithFullResponse: true });
 
   t.deepEqual(res.statusCode, 200);
 });

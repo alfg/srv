@@ -82,7 +82,6 @@ if (program.docs) {
 
 if (program.config) {
   try {
-
     // Load and extend config.
     const customConfig = require(resolve(  // eslint-disable-line global-require
       process.cwd(), program.config));

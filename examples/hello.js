@@ -5,7 +5,6 @@
 
 
 export default function hello(app) {
-
   /**
    * @api {get} /hello/:name Say "Hello" to user.
    * @apiName GetHello

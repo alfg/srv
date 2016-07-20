@@ -2,9 +2,11 @@ import test from 'ava';
 import srv from '../build/lib/core.js';
 import request from 'request-promise';
 
+import config from '../default.json';
+
 
 const listen = (fn) => {
-  const server = srv(fn);
+  const server = srv(fn, config);
   const host = '127.0.0.1';
 
   return new Promise((resolve, reject) => {
@@ -47,7 +49,7 @@ test('health-check OK', async t => {
   const fn = () => {};  // noop.
 
   const url = await listen(fn);
-  const res = await request(url + '/health-check');
+  const res = await request(`${url}/health-check`);
 
   t.deepEqual(res, 'HTTP OK');
 });
@@ -57,8 +59,10 @@ test('test CORS', async t => {
 
   const url = await listen(fn);
 
-  const headers = { 'origin': 'testing.com' };
-  const res = await request(url + '/health-check', { resolveWithFullResponse: true, headers: headers });
+  const headers = { origin: 'testing.com' };
+  const res = await request(`${url}/health-check`, {
+    resolveWithFullResponse: true, headers,
+  });
 
   t.deepEqual(res.headers['access-control-allow-origin'], 'testing.com');
 });
@@ -67,7 +71,7 @@ test('null function', async t => {
   const fn = null;  // noop.
 
   const url = await listen(fn);
-  const res = await request(url + '/health-check', { resolveWithFullResponse: true });
+  const res = await request(`${url}/health-check`, { resolveWithFullResponse: true });
 
   t.deepEqual(res.statusCode, 200);
 });

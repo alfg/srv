@@ -2,9 +2,11 @@ import test from 'ava';
 import srv from '../build/lib/core.js';
 import request from 'request-promise';
 
+import config from '../default.json';
+
 
 const listen = (fn) => {
-  const server = srv(fn);
+  const server = srv(fn, config);
   const host = '127.0.0.1';
 
   return new Promise((resolve, reject) => {

@@ -39,3 +39,7 @@ jspm_packages
 # Project
 build
 docs
+
+# dotenv files
+.env
+.env.*

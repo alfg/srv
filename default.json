@@ -1,0 +1,18 @@
+{
+  "app": {
+    "host": "0.0.0.0",
+    "port": 3000
+  },
+  "cors": {
+      "allowedOrigins": []
+  },
+  "docs": {
+    "folder": "lib"
+  },
+  "logging": {
+    "logs": "./logs",
+    "level": "info",
+    "filename": "all-logs.log",
+    "maxsize": 5242880
+  }
+}

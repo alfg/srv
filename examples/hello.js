@@ -5,7 +5,7 @@
 
 
 export default function hello(app) {
-  
+
   /**
    * @api {get} /hello/:name Say "Hello" to user.
    * @apiName GetHello
@@ -22,7 +22,7 @@ export default function hello(app) {
    */
   app.get('/hello/:user', (req, res) => {
     const user = req.params.user;
-    app.logger.info(`Hello ${user}!`);
+    app.log.info(`Hello ${user}!`);
     res.json({ hello: user });
   });
 }

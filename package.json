@@ -9,7 +9,16 @@
     ],
     "plugins": [
       "transform-runtime"
-    ]
+    ],
+    "ignore": "test",
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "ava": {
+    "require": ["babel-core/register"]
   },
   "bin": {
     "srv": "build/srv"
@@ -20,7 +29,7 @@
   "scripts": {
     "gulp": "gulp",
     "prepublish": "npm run gulp build",
-    "test": "gulp build && ava"
+    "test": "gulp build && nyc ava"
   },
   "repository": {
     "type": "git",
@@ -54,6 +63,7 @@
   "devDependencies": {
     "ava": "^0.15.2",
     "babel-eslint": "^6.1.2",
+    "coveralls": "^2.11.11",
     "del": "^2.2.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-config-airbnb-base": "^3.0.1",
@@ -64,6 +74,7 @@
     "gulp-eslint": "^3.0.1",
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.0.1",
+    "nyc": "^7.0.0",
     "request-promise": "^3.0.0"
   }
 }

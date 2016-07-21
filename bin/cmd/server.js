@@ -1,6 +1,6 @@
 import srv from '../lib/core.js';  // eslint-disable-line import/no-unresolved
 
-export default function server(file, port, host, config, cb) {
+export default function server(file, opt, cb) {
   // Load mod instance.
   let mod;
 
@@ -14,7 +14,8 @@ export default function server(file, port, host, config, cb) {
     cb(new Error(`${file} does not export a function.`));
   }
 
-  srv(mod, config).listen(port, host, (err) => {
+  const { port, host } = opt.app;
+  srv(mod, opt).listen(port, host, (err) => {
     if (err) {
       return cb(err.stack);
     }

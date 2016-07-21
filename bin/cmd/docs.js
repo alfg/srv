@@ -1,14 +1,14 @@
 import apidoc from 'apidoc';
 
-export default function (src) {
-  const opt = {
-    dest: 'docs/',
+export default function (src, opt) {
+  const options = {
     src: src || 'lib/',
-    includeFilters: ['.*\\.js$'],
-    silent: true,
+    dest: opt.dest || 'docs/',
+    includeFilters: opt.includeFilters || ['.*\\.js$'],
+    silent: opt.silent || true,
   };
 
-  const created = apidoc.createDoc(opt);
+  const created = apidoc.createDoc(options);
 
   if (created) {
     return;

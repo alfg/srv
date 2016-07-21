@@ -7,7 +7,9 @@
       "allowedOrigins": []
   },
   "docs": {
-    "folder": "lib"
+    "dest": "docs/",
+    "includeFilters": [".*\\.js$"],
+    "silent": true
   },
   "logging": {
     "logs": "./logs",

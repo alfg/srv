@@ -1,6 +1,6 @@
 {
   "name": "srv-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A modern, opinionated and simple microservices stack built on Express.",
   "main": "index.js",
   "babel": {
@@ -18,7 +18,9 @@
     }
   },
   "ava": {
-    "require": ["babel-core/register"]
+    "require": [
+      "babel-core/register"
+    ]
   },
   "bin": {
     "srv": "build/srv"
@@ -58,6 +60,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "morgan": "^1.7.0",
+    "update-notifier": "^1.0.2",
     "winston": "^2.2.0"
   },
   "devDependencies": {

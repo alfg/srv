@@ -11,6 +11,13 @@
     "includeFilters": [".*\\.js$"],
     "silent": true
   },
+  "lint": {
+    "ignorePattern": ["node_modules", "build", "docs"],
+    "rules": {
+        "extends": "airbnb-base",
+        "parser": "babel-eslint"
+    }
+  },
   "logging": {
     "logs": "./logs",
     "level": "info",

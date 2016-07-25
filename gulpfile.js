@@ -27,6 +27,11 @@ gulp.task('transpile-lib', () => (
   .pipe(gulp.dest('build/lib'))
 ));
 
+gulp.task('copy', () => {
+  gulp.src('default.json')
+  .pipe(gulp.dest('build'));
+});
+
 gulp.task('watch', () => {
   gulp.watch('lib/**/*', ['build']);
 });
@@ -39,4 +44,4 @@ gulp.task('lint', () => (
 ));
 
 gulp.task('default', ['build', 'watch']);
-gulp.task('build', ['transpile-bin', 'transpile-lib']);
+gulp.task('build', ['copy', 'transpile-bin', 'transpile-lib']);

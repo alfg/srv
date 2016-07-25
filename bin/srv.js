@@ -5,11 +5,14 @@
 import dotenv from 'dotenv';
 import program from 'commander';
 import chalk from 'chalk';
+import updateNotifier from 'update-notifier';
 import pkg from '../package.json';
 import config from '../default.json';
 import { resolve } from 'path';
 
 import * as cmd from './cmd/index';
+
+updateNotifier({ pkg }).notify();
 
 // Banner.
 const banner = `
@@ -28,6 +31,7 @@ program
   .option('-p, --port [n]', 'Port to listen on', process.env.SRV_PORT)
   .option('-H, --host [value]', 'Host to listen on', process.env.SRV_HOST)
   .option('-D, --docs [value]', 'Generate Docs from folder', config.docs.folder)
+  .option('-L, --lint', 'Lint code with ESLint')
   .option('-n, --no-babel', 'Skip Babel transformation')
   .option('-C, --config [value]', 'Configuration file')
   .parse(process.argv);
@@ -92,6 +96,16 @@ if (program.docs) {
   try {
     cmd.docs(program.docs, config.docs);
     console.log(chalk.blue('▼ Docs generated.'), chalk.white(`http://${config.app.host}:${config.app.port}/docs`));
+  } catch (err) {
+    console.error(chalk.red(err));
+    process.exit(1);
+  }
+}
+
+if (program.lint) {
+  try {
+    console.log(chalk.blue('▼ Linting code.'));
+    cmd.lint(config.lint);
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);

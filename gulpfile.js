@@ -28,7 +28,7 @@ gulp.task('transpile-lib', () => (
 ));
 
 gulp.task('copy', () => {
-  gulp.src('default.json')
+  gulp.src(['default.json', 'package.json'])
   .pipe(gulp.dest('build'));
 });
 

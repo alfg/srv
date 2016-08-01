@@ -115,10 +115,10 @@ See [examples/hello.js](examples/hello.js) for an example.
 You can configure whitelisted domains in the default configuration.
 
 ## Configuration
-Configuration defaults are set on [default.json](default.json). You can add, extend or override these defaults by creating your own configuratino file (as json) and use the `--config` flag when running `srv`.
+Configuration defaults are set on [default.json](default.json). You can add, extend or override these defaults by creating your own configuration file (as json) and use the `--config` flag when running `srv`.
 
 ```
-$ srv examples/hello.js --config custom-config.json
+$ srv examples/hello.js --config custom.json
 ```
 
 This will use `default.json` as a base config and extend using your provided configuration.

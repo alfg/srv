@@ -29,6 +29,7 @@ A few simple rules to follow before sending any pull requests:
 * Lint and test your code
 * Feature Requests
 * Provide an example in `examples/` if necessary
+* Provide tests for your code.
 * Lets try to keep `srv` a minimal footprint.
 * If you're unsure of adding an enhancement, fix or feature, feel free to submit an issue to ask.
 
@@ -46,18 +47,16 @@ Run `gulp lint` to check for linting errors before sending a Pull Request.
 
 
 ## Testing
-TODO
+Tests are written using [ava](https://github.com/avajs/ava) and [nyc](https://github.com/bcoe/nyc) for coverage.
 
+Run `npm test` to run tests and output coverage report:
+```
+$ npm test
+```
 
-## TODO
-* Tests
-* Caching lib (node-cache?)
-* Default config template
-* Environment Variables
-  * https://github.com/indexzero/nconf
-  * https://github.com/motdotla/dotenv
-  * https://github.com/lorenwest/node-config
-
+Write your tests in their respective test file:
+* `test/api.js` &mdash; API related tests.
+* `test/cli.js` &mdash; CLI related tests.
 
 ## Resources
 * https://github.com/alfg/srv
@@ -68,3 +67,6 @@ TODO
 * https://github.com/expressjs/cors
 * http://editorconfig.org/
 * http://gulpjs.com/
+* http://eslint.org/
+* https://github.com/avajs/ava
+* https://github.com/istanbuljs/nyc

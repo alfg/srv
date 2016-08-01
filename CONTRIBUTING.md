@@ -1,4 +1,4 @@
-# Development
+# Contributing Guide
 
 ## Install
 `srv` is developed and tested on NodeJS 6+, but is published via babel to work with v0.12+. Gulp is the build tool used for transpiling ES2015 and linting.

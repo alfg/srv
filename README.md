@@ -17,18 +17,27 @@ Creating services using the [microservices architecture](http://martinfowler.com
 * Babel Transpilation
 * Logging
 * RESTful Documentation Generation
-* CORS configuration
+* CORS
+* Linting (eslint)
 
 ## Included Modules
 * [Express](http://expressjs.com/) &mdash; Minimalist web framework
 * [Babel](https://babeljs.io/) &mdash; Javascript Transpilation.
 * [Winston Logging](https://github.com/winstonjs/winston) &mdash; A multi-transport async logging library for node.js.
 * [apiDoc](http://apidocjs.com) &mdash; Inline Documentation for RESTful web APIs.
+* [ESLint](http://eslint.org/) &mdash; Linting utility.
+* [dotenv](https://github.com/motdotla/dotenv) &mdash; Environment variables.
 
 ## Install
 ```
 $ npm install -g srv-cli
 $ srv --help
+```
+
+or local (without bin symlink):
+```
+$ npm install srv-cli --no-bin-links
+$ node node_modules/srv-cli/build/srv --help
 ```
 
 ## Example
@@ -55,20 +64,18 @@ Any ES2015 code will automatically be transpiled (via babel), then served at the
 ## CLI Reference
 ```
 $ srv --help
-Usage: srv [options] [command] entrypoint.js
-
-Commands:
-
-  help  Display help
+Usage: srv entrypoint.js [options]
 
 Options:
 
-  -D, --docs [value]  Generate Docs from folder
-  -h, --help          Output usage information
-  -H, --host [value]  Host to listen on
-  -n, --no-babel      Skip Babel transformation
-  -p, --port <n>      Port to listen on
-  -v, --version       Output the version number
+  -h, --help            output usage information
+  -V, --version         output the version number
+  -p, --port [n]        Port to listen on
+  -H, --host [value]    Host to listen on
+  -D, --docs [value]    Generate Docs from folder
+  -L, --lint            Lint code with ESLint
+  -n, --no-babel        Skip Babel transformation
+  -C, --config [value]  Configuration file
 ```
 
 ### Generating Documentation
@@ -91,6 +98,8 @@ By default, `srv` will transpile the entrypoint file (via babel) its dependencie
 
 See https://babeljs.io/docs/plugins/preset-es2015/ for supported plugins loaded by preset-es2015.
 
+You can disable the transpilation by providing the `--no-babel` flag.
+
 
 ## Logging
 [Winston](https://github.com/winstonjs/winston) logging transport is enabled by default and will log all http `info` logs to `logs/` and all console `debug` logs to stdout.
@@ -105,11 +114,66 @@ See [examples/hello.js](examples/hello.js) for an example.
 
 You can configure whitelisted domains in the default configuration.
 
+## Configuration
+Configuration defaults are set on [default.json](default.json). You can add, extend or override these defaults by creating your own configuratino file (as json) and use the `--config` flag when running `srv`.
+
+```
+$ srv examples/hello.js --config custom-config.json
+```
+
+This will use `default.json` as a base config and extend using your provided configuration.
+
+## Environment Variables
+srv uses [dotenv](https://github.com/motdotla/dotenv) to load environment varaibles from a `.env` file into `process.env`.
+
+Just create a `.env` file in the root directory of your project. Add environment-specific variables on new lines in the form of `NAME=VALUE`. For example:
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=s1mpl3
+```
+
+That's it.
+
+`process.env` now has the keys and values you defined in your `.env` file.
+
+```javascript
+db.connect({
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS
+});
+```
+
+This makes it easy for development, but it is not recommended to add your `.env` files into VCS.
+
+## Linting
+srv uses [ESLint](http://eslint.org) to lint your code using the `airbnb-base` config.
+
+To eslint your code, just use the `--lint` flag:
+```
+$ srv examples/hello.js --lint
+```
+
+If you wish to update the default profile, you can set  `lint` options on your custom configuration.
+
+```javascript
+  "lint": {
+    "rules": {
+        "extends": "airbnb-base",
+    }
+  }
+```
+
 ## Adding Middleware
 TODO
 
-## Development
-See: [DEVELOPMENT.md](DEVELOPMENT.md)
+## Contributing
+See: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Change Log
+See: [CHANGELOG.md](CHANGELOG.md)
 
 ## License
-MIT
+See: [LICENSE](LICENSE)

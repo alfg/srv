@@ -4,7 +4,7 @@
  */
 
 
-export default function(app) {
+export default function (app) {
   /**
    * @api {get} /hello/:name Say "Hello" to user.
    * @apiName GetHello

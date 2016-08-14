@@ -3,8 +3,12 @@
  * Run using: srv hello.js
  */
 
+function tadaMiddleware(req, res, next) {
+  console.log('tada!'); // eslint-disable-line no-console
+  next();
+}
 
-export default function(app) {
+export default function (app) {
   /**
    * @api {get} /hello/:name Say "Hello" to user.
    * @apiName GetHello
@@ -27,11 +31,5 @@ export default function(app) {
 }
 
 export function middleware(app) {
-  console.log('middleware export');
   app.use(tadaMiddleware);
-}
-
-function tadaMiddleware(req, res, next) {
-  console.log('tada!');
-  next();
 }

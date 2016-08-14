@@ -3,6 +3,10 @@
  * Run using: srv hello.js
  */
 
+function tadaMiddleware(req, res, next) {
+  console.log('tada!'); // eslint-disable-line no-console
+  next();
+}
 
 export default function (app) {
   /**
@@ -24,4 +28,8 @@ export default function (app) {
     app.log.info(`Hello ${user}!`);
     res.json({ hello: user });
   });
+}
+
+export function middleware(app) {
+  app.use(tadaMiddleware);
 }

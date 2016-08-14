@@ -167,7 +167,17 @@ If you wish to update the default profile, you can set  `lint` options on your c
 ```
 
 ## Adding Middleware
-TODO
+Adding extra middleware is easy. Simply export a middleware function in your entrypoint file containing your middleware loaders.
+
+Example:
+```
+export function middleware(app) {
+  app.use(awesomeMiddleware);
+  app.use(anotherMiddleware);
+}
+```
+
+See [examples/middleware-example.js](examples/middleware-example.js) for an example.
 
 ## Contributing
 See: [CONTRIBUTING.md](CONTRIBUTING.md)

@@ -25,3 +25,13 @@ export default function(app) {
     res.json({ hello: user });
   });
 }
+
+export function middleware(app) {
+  console.log('middleware export');
+  app.use(tadaMiddleware);
+}
+
+function tadaMiddleware(req, res, next) {
+  console.log('tada!');
+  next();
+}

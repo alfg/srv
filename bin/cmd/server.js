@@ -5,13 +5,13 @@ export default function server(file, opt, cb) {
   let mod;
 
   try {
-    mod = require(file).default;  // eslint-disable-line global-require
+    mod = require(file);  // eslint-disable-line global-require
   } catch (e) {
     cb(new Error(`${file} does not exist.`));
   }
 
-  if (typeof mod !== 'function') {
-    cb(new Error(`${file} does not export a function.`));
+  if (typeof mod.default !== 'function') {
+    cb(new Error(`${file} does not export a default function.`));
   }
 
   const { port, host } = opt.app;

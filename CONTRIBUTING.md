@@ -7,7 +7,7 @@
 
 ```bash
 $ nvm use 6  # Optional.
-$ git clone git@github.com:alfg/srv.git
+$ git clone https://github.com/alfg/srv.git
 $ npm install -g gulp
 $ cd srv && npm install
 $ gulp build && node build/srv examples/hello.js

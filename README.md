@@ -1,8 +1,6 @@
 # `▼srv`
 ▼ A modern, opinionated and simple microservices stack built on Express.
 
-**Currently a work-in-progress project!**
-
 ![npm-version](https://img.shields.io/npm/v/srv-cli.svg)
 [![Build Status](https://travis-ci.org/alfg/srv.svg?branch=master)](https://travis-ci.org/alfg/srv)
 [![Coverage Status](https://coveralls.io/repos/github/alfg/srv/badge.svg?branch=master)](https://coveralls.io/github/alfg/srv?branch=master)

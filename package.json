@@ -63,12 +63,14 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "0.16.0",
+    "babel-core": "6.14.0",
     "babel-eslint": "^6.1.2",
+    "babel-register": "6.14.0",
     "coveralls": "^2.11.11",
     "del": "^2.2.1",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-config-airbnb": "10.0.1",
+    "eslint-config-airbnb-base": "5.0.3",
     "eslint-plugin-import": "^1.10.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -76,7 +78,7 @@
     "gulp-eslint": "^3.0.1",
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.0.1",
-    "nyc": "^7.0.0",
-    "request-promise": "^3.0.0"
+    "nyc": "8.1.0",
+    "request-promise": "4.1.1"
   }
 }

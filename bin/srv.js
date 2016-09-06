@@ -69,10 +69,6 @@ if (program.config) {
     // Extend config object.
     Object.assign(config, customConfig);
 
-    // Host and port flags take precedence.
-    config.app.host = program.host || config.app.host;
-    config.app.port = program.port || config.app.port;
-
     console.log(chalk.blue('▼ Loading configuration: '), chalk.white(program.config));
   } catch (err) {
     console.error(chalk.red(err));
@@ -112,12 +108,15 @@ if (program.lint) {
   }
 }
 
+// Host and port flags take precedence.
+config.app.host = program.host || config.app.host;
+config.app.port = program.port || config.app.port;
+
 // Start server.
 cmd.server(file, config, (err) => {
   if (err) {
     console.error(chalk.red(err));
   }
-  const host = program.host || config.app.host;
-  const port = program.port || config.app.port;
+  const { host, port } = config.app;
   console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

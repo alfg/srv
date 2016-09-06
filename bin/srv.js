@@ -28,8 +28,8 @@ dotenv.config({ silent: true });
 program
   .version(pkg.version)
   .usage('entrypoint.js [options]')
-  .option('-p, --port [n]', 'Port to listen on', process.env.SRV_PORT)
-  .option('-H, --host [value]', 'Host to listen on', process.env.SRV_HOST)
+  .option('-p, --port [n]', 'Port to listen on', process.env.PORT)
+  .option('-H, --host [value]', 'Host to listen on', process.env.HOST)
   .option('-D, --docs [value]', 'Generate Docs from folder', config.docs.folder)
   .option('-L, --lint', 'Lint code with ESLint')
   .option('-n, --no-babel', 'Skip Babel transformation')

@@ -117,6 +117,7 @@ cmd.server(file, config, (err) => {
   if (err) {
     console.error(chalk.red(err));
   }
-  const { host, port } = config.app;
+  const host = program.host || config.app.host;
+  const port = program.port || config.app.port;
   console.log(chalk.green('▼ Ready! Listening on:', chalk.white(`http://${host}:${port}`)));
 });

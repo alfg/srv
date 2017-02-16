@@ -4,6 +4,7 @@
 ![npm-version](https://img.shields.io/npm/v/srv-cli.svg)
 ![dependencies](https://david-dm.org/alfg/srv.svg)
 [![Build Status](https://travis-ci.org/alfg/srv.svg?branch=master)](https://travis-ci.org/alfg/srv)
+[![Build status](https://ci.appveyor.com/api/projects/status/8t5sy362ymvi763j?svg=true)](https://ci.appveyor.com/project/alfg/srv)
 [![Coverage Status](https://coveralls.io/repos/github/alfg/srv/badge.svg?branch=master)](https://coveralls.io/github/alfg/srv?branch=master)
 
 ## Why?

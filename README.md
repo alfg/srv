@@ -1,4 +1,6 @@
 # `▼srv`
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/alfg/srv.svg)](https://greenkeeper.io/)
 > A modern, opinionated and simple microservices stack built on Express.
 
 ![npm-version](https://img.shields.io/npm/v/srv-cli.svg)

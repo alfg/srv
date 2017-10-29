@@ -1,6 +1,5 @@
 # `▼srv`
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/alfg/srv.svg)](https://greenkeeper.io/)
 > A modern, opinionated and simple microservices stack built on Express.
 
 ![npm-version](https://img.shields.io/npm/v/srv-cli.svg)
@@ -8,6 +7,7 @@
 [![Build Status](https://travis-ci.org/alfg/srv.svg?branch=master)](https://travis-ci.org/alfg/srv)
 [![Build status](https://ci.appveyor.com/api/projects/status/8t5sy362ymvi763j?svg=true)](https://ci.appveyor.com/project/alfg/srv)
 [![Coverage Status](https://coveralls.io/repos/github/alfg/srv/badge.svg?branch=master)](https://coveralls.io/github/alfg/srv?branch=master)
+[![Greenkeeper badge](https://badges.greenkeeper.io/alfg/srv.svg)](https://greenkeeper.io/)
 
 ## Why?
 Creating services using the [microservices architecture](http://martinfowler.com/articles/microservices.html) pattern can involve a lot of repeated boilerplate code including server, logging, documentation, transpilation and other middleware.

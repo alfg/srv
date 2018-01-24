@@ -76,7 +76,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-cached": "^1.1.0",
-    "gulp-eslint": "^4.0.0",
+    "gulp-eslint": "^4.0.2",
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.0.1",
     "nyc": "11.4.1",

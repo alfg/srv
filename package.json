@@ -64,7 +64,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "ava": "0.24.0",
+    "ava": "0.25.0",
     "babel-core": "6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-register": "6.26.0",

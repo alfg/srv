@@ -1,11 +1,19 @@
 language: node_js
 node_js:
-  - 8
-  - 7
-  - 6
-  - 5
-  - 4
+- 8
+- 7
+- 6
+- 5
+- 4
 before_install:
-  - 'npm install -g npm@latest'
+- npm install -g npm@latest
 after_success:
-  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+- "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+deploy:
+  provider: npm
+  email: alf.g.jr@gmail.com
+  api_key:
+    secure: ACADRIgwUDZeoyYJeax0+Yw6CXJsigNL3OmJDFxXQGhxg6SV7eyluS5Q7vds722WSm6g5ttnq406j6BVbWQiWoc9jwTPQiLgTzJmXE6pyLx94ICrOfMMkLKJ7XzoDVV7MWO6M8PkWVF0xWUAQHyAFwNlGtmppL30RzhJfLDLH1DWLVJhyFHZtLwKmn/WauUMy0W0HrCWbCqkD6+/s4SD1Blk0VJo8Dfv5hWC68OIsswfGbZvXsy0g8Gtyb4ZOtZl0jZDXEiUxk+ObyqcC1xct9Sz5w+rwMcFKPx+gGt83Oy+iHp1s23heO3xFHP7hdPrmkiv39D+9i+6voBJEQFg9YUdmTCERrJv0J2HOOUBMOEjbwL0Ealb+gMl0kAKWezZjXcy5HbM7erMwF27t4ScxGsWFiVod+jnrKzTxRydrBUisq3TjMSLq9DFwwhrXGesBus+dxQYtlw9/5aLM80jEVLU1oYzt89ChQaxkcJuZZ00mDW/tN9Ve3CwDbxOPhAZ60i3kjD1191JSCTMh3x6iT6cZE/6EbMa2S73EuzzuJiLaMKbOQ7dQnFhWUBEluLBNrNHgDNT/RcSuoXeZchIU7HZBtCnIDKm0p+gyncX/NQ8sKFZEzABPXSihlc91cnJYpdwWsshcwrtxb7qGOP6RA2zn9fSkg7JC5sIjR1GbCg=
+  on:
+    tags: true
+    repo: alfg/srv

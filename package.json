@@ -1,6 +1,6 @@
 {
   "name": "srv-cli",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A modern, opinionated and simple microservices stack built on Express.",
   "main": "index.js",
   "babel": {

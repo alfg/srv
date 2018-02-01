@@ -7,14 +7,22 @@ node_js:
 - 4
 before_install:
 - npm install -g npm@latest
-- npm install gulp
+- npm install -g gulp-cli
 after_success:
 - "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
-deploy:
-  provider: npm
-  email: alf.g.jr@gmail.com
-  api_key:
-    secure: qUcZF5+rV5Ax7KioMErMLC6RoGKcCrgPlDxrjYo0o4WoyXkn+FBljzTP6MA7BjETvl9ZMAUgyXn5al2Ti/yuZpuTdxO7Z/YNWl3XXYqhG5dNbFQOzZPJaYQLovhQ4ZUUnih+E2iOCuv3vbpAWUvcN6QRmP3l18ahG3cFwWF6N3kcZ7Ip3jBRGgLxvH3enVRi+f4jRhXydcpqtGo0FOQJoMc5n9uyYn7Ky1n0h2keeUJBmFRNS6yoVu39lQ/7FTkJH1du5tVbe6pGNNRBoKxQq03nmpamepbMVbfxivL3LS1j4/PvCeWfThkYnHP8SzdZyMzIL0xgtqY7v6Fper9f8xAthO+SejC/JkKoN9nIpsTXJsyFheriEGRx/9rRXr9gP8l8UTWCAbY9kWLbOp1WD+YLijDCZSMUHD3pO3do7KAj+N0uOTkHjxgoXtFlUu9lv0p8iU8Z1Rog7Kp7rC2TZKxHI1mRiu/4oeIaxDSfzn4OowTvK4XPqP3LhDaaaStqhQQclQYi24LmAAzLwosfT3M6gEbhHh6RrY/27EUQF9vJtx0mpIum4nD5W4eycdnrCvMW3dfd1puvua5CCUO9quxoYIyaNLSLsXa9u9xwR6SjzHkRrYvQv8Rwg1W7Mjsw/xXEAASB22eXM+zH2PQlKhGtuQxXWG5L70SsKovOUvs=
-  on:
-    tags: true
-    repo: alfg/srv
+before_deploy:
+  - npm link gulp
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: "8"
+      deploy:
+        skip_cleanup: true
+        provider: npm
+        email: alf.g.jr@gmail.com
+        api_key:
+          secure: qUcZF5+rV5Ax7KioMErMLC6RoGKcCrgPlDxrjYo0o4WoyXkn+FBljzTP6MA7BjETvl9ZMAUgyXn5al2Ti/yuZpuTdxO7Z/YNWl3XXYqhG5dNbFQOzZPJaYQLovhQ4ZUUnih+E2iOCuv3vbpAWUvcN6QRmP3l18ahG3cFwWF6N3kcZ7Ip3jBRGgLxvH3enVRi+f4jRhXydcpqtGo0FOQJoMc5n9uyYn7Ky1n0h2keeUJBmFRNS6yoVu39lQ/7FTkJH1du5tVbe6pGNNRBoKxQq03nmpamepbMVbfxivL3LS1j4/PvCeWfThkYnHP8SzdZyMzIL0xgtqY7v6Fper9f8xAthO+SejC/JkKoN9nIpsTXJsyFheriEGRx/9rRXr9gP8l8UTWCAbY9kWLbOp1WD+YLijDCZSMUHD3pO3do7KAj+N0uOTkHjxgoXtFlUu9lv0p8iU8Z1Rog7Kp7rC2TZKxHI1mRiu/4oeIaxDSfzn4OowTvK4XPqP3LhDaaaStqhQQclQYi24LmAAzLwosfT3M6gEbhHh6RrY/27EUQF9vJtx0mpIum4nD5W4eycdnrCvMW3dfd1puvua5CCUO9quxoYIyaNLSLsXa9u9xwR6SjzHkRrYvQv8Rwg1W7Mjsw/xXEAASB22eXM+zH2PQlKhGtuQxXWG5L70SsKovOUvs=
+        on:
+          tags: true
+          repo: alfg/srv

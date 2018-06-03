@@ -80,7 +80,7 @@
     "gulp-eslint": "^4.0.2",
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.0.1",
-    "nyc": "11.8.0",
+    "nyc": "12.0.1",
     "request-promise": "4.2.2"
   }
 }

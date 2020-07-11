@@ -62,7 +62,7 @@ Write your tests in their respective test file:
 * https://github.com/alfg/srv
 * http://apidocjs.com/#params
 * http://eslint.org/
-* http://babeljs.io/docs/plugins/preset-es2015/
+* http://babeljs.io/docs/plugins/preset-env/
 * https://github.com/winstonjs/winston
 * https://github.com/expressjs/cors
 * http://editorconfig.org/

@@ -96,9 +96,9 @@ Refer to http://apidocjs.com/#params for supported apiDoc params.
 
 
 ### Babel/ES6
-By default, `srv` will transpile the entrypoint file (via babel) its dependencies with the es2015 preset. No need to setup babel yourself, it works out of the box!
+By default, `srv` will transpile the entrypoint file (via babel) its dependencies with the preset-env preset. No need to setup babel yourself, it works out of the box!
 
-See https://babeljs.io/docs/plugins/preset-es2015/ for supported plugins loaded by preset-es2015.
+See https://babeljs.io/docs/plugins/preset-env/ for supported plugins loaded by preset-env.
 
 You can disable the transpilation by providing the `--no-babel` flag.
 

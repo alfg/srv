@@ -1,6 +1,6 @@
 {
   "name": "srv-cli",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "A modern, opinionated and simple microservices stack built on Express.",
   "main": "index.js",
   "ava": {
@@ -46,11 +46,11 @@
     "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "cors": "^2.8.5",
-    "dotenv": "^6.0.0",
-    "eslint": "^4.19.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.4.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "update-notifier": "^2.3.0",
+    "update-notifier": "^4.1.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -74,6 +74,6 @@
     "gulp-ext": "^1.0.0",
     "gulp-task-listing": "^1.1.0",
     "nyc": "^15.1.0",
-    "request-promise": "4.2.2"
+    "request-promise": "^4.2.5"
   }
 }

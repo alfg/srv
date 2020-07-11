@@ -44,6 +44,6 @@ function lint() {
 
 export { clean, help, transpileBin, transpileLib, copy, lint, watchFiles as watch };
 
-const build = gulp.series(clean);
+const build = gulp.series(copy, transpileBin, transpileLib);
 
 export default build;

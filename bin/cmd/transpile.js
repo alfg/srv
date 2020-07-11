@@ -1,20 +1,20 @@
-import preset2015 from 'babel-preset-es2015';
-import alias from 'babel-plugin-module-alias';
-import transformRuntime from 'babel-plugin-transform-runtime';
-import register from 'babel-register';
+import presetEnv from '@babel/preset-env';
+import alias from 'babel-plugin-module-resolver';
+import transformRuntime from '@babel/plugin-transform-runtime';
+import register from '@babel/register';
 
 export default function transpile() {
-  const path = require.resolve('babel-runtime/package')
-  .replace(/[\\\/]package.json$/, '');
+  const path = require.resolve('@babel/runtime/package')
+  .replace(/[\\/]package.json$/, '');
 
   try {
     register({
-      presets: [preset2015],
+      presets: [presetEnv],
       plugins: [
         transformRuntime,
-        [alias, [
+        [alias,
           { src: path, expose: 'babel-runtime' },
-        ]],
+        ],
       ],
     });
     return;

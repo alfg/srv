@@ -41,17 +41,17 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.10.4",
     "@babel/runtime": "^7.10.4",
-    "apidoc": "^0.17.6",
+    "apidoc": "^0.23.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "chalk": "^2.2.0",
     "commander": "^2.9.0",
-    "cors": "^2.7.1",
+    "cors": "^2.8.5",
     "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
-    "express": "^4.14.0",
-    "morgan": "^1.7.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "update-notifier": "^2.3.0",
-    "winston": "^2.2.0"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",

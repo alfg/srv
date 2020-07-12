@@ -1,25 +1,13 @@
 {
   "name": "srv-cli",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "A modern, opinionated and simple microservices stack built on Express.",
   "main": "index.js",
-  "babel": {
-    "presets": [
-      "es2015"
-    ],
-    "plugins": [
-      "transform-runtime"
-    ],
-    "ignore": "test",
-    "env": {
-      "development": {
-        "sourceMaps": "inline"
-      }
-    }
-  },
   "ava": {
+    "babel": true,
     "require": [
-      "babel-core/register"
+      "@babel/register",
+      "@babel/polyfill"
     ]
   },
   "bin": {
@@ -30,8 +18,8 @@
   ],
   "scripts": {
     "gulp": "gulp",
-    "prepublish": "npm run gulp build",
-    "test": "gulp build && nyc ava"
+    "prepare": "npm run gulp",
+    "test": "gulp && nyc ava"
   },
   "repository": {
     "type": "git",
@@ -49,38 +37,43 @@
   },
   "homepage": "https://github.com/alfg/srv",
   "dependencies": {
-    "apidoc": "^0.17.6",
-    "babel-plugin-module-alias": "^1.5.0",
-    "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-register": "6.26.0",
-    "chalk": "^2.2.0",
-    "commander": "^2.9.0",
-    "cors": "^2.7.1",
-    "dotenv": "^6.0.0",
-    "eslint": "^4.19.1",
-    "express": "^4.14.0",
-    "morgan": "^1.7.0",
-    "update-notifier": "^2.3.0",
-    "winston": "^2.2.0"
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "@babel/runtime": "^7.10.4",
+    "apidoc": "^0.23.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.4.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "update-notifier": "^4.1.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "ava": "0.25.0",
-    "babel-core": "6.26.0",
+    "@ava/babel": "^1.0.1",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "ava": "^3.10.1",
     "babel-eslint": "^9.0.0",
-    "babel-register": "6.26.0",
     "coveralls": "^3.0.0",
-    "del": "^3.0.0",
+    "del": "^5.1.0",
     "eslint-config-airbnb": "17.0.0",
     "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.7.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-cached": "^1.1.0",
-    "gulp-eslint": "^4.0.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-cached": "^1.1.1",
+    "gulp-eslint": "^6.0.0",
     "gulp-ext": "^1.0.0",
-    "gulp-task-listing": "^1.0.1",
-    "nyc": "12.0.2",
-    "request-promise": "4.2.2"
+    "gulp-task-listing": "^1.1.0",
+    "nyc": "^15.1.0",
+    "request-promise": "^4.2.5"
   }
 }

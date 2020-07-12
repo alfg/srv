@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-/* eslint no-console:0 import/no-unresolved:0 */
-
 import dotenv from 'dotenv';
 import program from 'commander';
 import chalk from 'chalk';
@@ -80,7 +78,7 @@ if (program.config) {
 if (!program.noBabel) {
   try {
     cmd.transpile();
-    console.log(chalk.blue('▼ Babel transpiled. Preset: ES2015'));
+    console.log(chalk.blue('▼ Babel transpiled. Preset: @babel/preset-env'));
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);

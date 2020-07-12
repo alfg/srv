@@ -1,9 +1,12 @@
 language: node_js
 node_js:
 - 8
-- 7
-- 6
+- 9
 - 10
+- 11
+- 12
+- 13
+- 14
 before_install:
 - npm install -g npm@latest
 - npm install -g gulp-cli

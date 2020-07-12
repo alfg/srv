@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-/* eslint no-console:0 import/no-unresolved:0 */
-
 import dotenv from 'dotenv';
 import program from 'commander';
 import chalk from 'chalk';

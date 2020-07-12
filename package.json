@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "gulp": "gulp",
-    "prepublishold": "npm run gulp build",
+    "prepare": "npm run gulp build",
     "test": "gulp && nyc ava"
   },
   "repository": {

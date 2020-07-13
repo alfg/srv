@@ -1,6 +1,6 @@
 {
   "name": "srv-cli",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A modern, opinionated and simple microservices stack built on Express.",
   "main": "index.js",
   "ava": {
@@ -37,7 +37,9 @@
   },
   "homepage": "https://github.com/alfg/srv",
   "dependencies": {
+    "@babel/core": "^7.10.4",
     "@babel/polyfill": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.10.4",
     "@babel/runtime": "^7.10.4",
